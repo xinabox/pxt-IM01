@@ -1,31 +1,36 @@
+[![GitHub Issues](https://img.shields.io/github/issues/xinabox/pxt-CS11.svg)](https://github.com/xinabox/pxt-CS11/issues) 
+![GitHub Commit](https://img.shields.io/github/last-commit/xinabox/pxt-CS11) 
+![Maintained](https://img.shields.io/maintenance/yes/2020) 
+![Build status badge](https://github.com/xinabox/pxt-CS11/workflows/maker/badge.svg)
+![Developer](https://img.shields.io/badge/Developer-lb-blue)
 
-> Open this page at [https://xinabox.github.io/pxt-im01-2/](https://xinabox.github.io/pxt-im01-2/)
+> Open this page at [https://.github.io//](https://.github.io//)
 
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
+* open []()
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
-* search for **https://github.com/xinabox/pxt-im01-2** and import
+* search for **https://github.com/** and import
 
-## Edit this project ![Build status badge](https://github.com/xinabox/pxt-im01-2/workflows/MakeCode/badge.svg)
+## Edit this project ![Build status badge](https://github.com//workflows/MakeCode/badge.svg)
 
 To edit this repository in MakeCode.
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
+* open []()
 * click on **Import** then click on **Import URL**
-* paste **https://github.com/xinabox/pxt-im01-2** and click import
+* paste **https://github.com/** and click import
 
 ## Blocks preview
 
 This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
 
-![A rendered view of the blocks](https://github.com/xinabox/pxt-im01-2/raw/master/.github/makecode/blocks.png)
+![A rendered view of the blocks](https://github.com//raw/master/.github/makecode/blocks.png)
 
 #### Metadata (used for search, rendering)
 
-* for PXT/microbit
+* for PXT/
 <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>

@@ -1,22 +1,32 @@
 {
-    "name": "pxt-im01-2",
-    "version": "0.0.1",
-    "description": "",
+    "name": "CS11",
+    "version": "0.0.8",
+    "description": "XinaBox CS11 SD Card: SD Card functionality.",
+    "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "radio": "*"
+        "core": "*"
     },
     "files": [
         "README.md",
-        "main.blocks",
-        "main.ts"
+		"main.ts",
+        "sdmm.cpp",
+		"im01.ts",
+		"im01.cpp",
+		"diskio.h",
+		"ff.cpp",
+		"ff.h",
+		"ffconf.h"
     ],
     "testFiles": [
         "test.ts"
     ],
     "public": true,
     "supportedTargets": [
-        "microbit"
+        "maker"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj",
+    "authors": [
+        "Luqmaan Baboo",
+        "Bjarke Gotfredsen"
+    ]
 }
