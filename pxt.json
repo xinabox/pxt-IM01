@@ -1,7 +1,7 @@
 {
-    "name": "IM01",
-    "version": "0.0.8",
-    "description": "XinaBox IM01 SD Card: SD Card functionality.",
+    "name": "CS11",
+    "version": "0.1.0",
+    "description": "XinaBox CS11 SD Card: SD Card functionality.",
     "license": "MIT",
     "dependencies": {
         "core": "*"
