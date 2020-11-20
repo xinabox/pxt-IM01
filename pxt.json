@@ -10,12 +10,12 @@
     "files": [
         "README.md",
         "sdmm.cpp",
-        "cs11.ts",
         "cs11.cpp",
         "diskio.h",
         "ff.cpp",
         "ff.h",
-        "ffconf.h"
+        "ffconf.h",
+        "IM01.ts"
     ],
     "testFiles": [
         "test.ts"
