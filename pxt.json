@@ -4,11 +4,11 @@
     "description": "XinaBox new IM01 extension",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "microphone": "*"
     },
     "files": [
         "README.md",
-        "main.ts",
         "sdmm.cpp",
         "cs11.ts",
         "cs11.cpp",
@@ -26,8 +26,7 @@
         "microbit"
     ],
     "preferredEditor": "tsprj",
-	
-	 "yotta": {
+    "yotta": {
         "config": {
             "microbit-dal": {
                 "bluetooth": {
@@ -49,9 +48,7 @@
             }
         }
     },
-	
     "panic_on_heap_full": 0,
-	
     "authors": [
         "Luqmaan Baboo",
         "Bjarke Gotfredsen"
