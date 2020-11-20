@@ -1,5 +1,6 @@
 #include "ff.h"
 #include "diskio.h"
+#include "pxt.h"
 
 #define MAX_DIR 0x200000
 #define MAX_DIR_EX 0x10000000
@@ -1131,6 +1132,7 @@ static FRESULT mount_volume(
 		return FR_DISK_ERR;
 	if (fmt >= 2)
 		return FR_NO_FILESYSTEM;
+	
 	bsect = fs->winsect;
 	{
 		if (ld_word(fs->win + BPB_BytsPerSec) != SS(fs))
@@ -1241,6 +1243,7 @@ static FRESULT validate(
 			res = FR_OK;
 		}
 	}
+	
 	*rfs = (res == FR_OK) ? obj->fs : 0;
 	return res;
 }
@@ -1639,6 +1642,8 @@ FRESULT f_sync(
 			tm = GET_FATTIME();
 			{
 				res = move_window(fs, fp->dir_sect);
+			
+				
 				if (res == FR_OK)
 				{
 					dir = fp->dir_ptr;

@@ -1,7 +1,7 @@
 {
-    "name": "CS11",
-    "version": "0.1.1",
-    "description": "XinaBox CS11 SD Card: SD Card functionality.",
+    "name": "IM01",
+    "version": "0.1.0",
+    "description": "XinaBox new IM01 extension",
     "license": "MIT",
     "dependencies": {
         "core": "*"
@@ -10,8 +10,8 @@
         "README.md",
         "main.ts",
         "sdmm.cpp",
-        "im01.ts",
-        "im01.cpp",
+        "cs11.ts",
+        "cs11.cpp",
         "diskio.h",
         "ff.cpp",
         "ff.h",
@@ -26,6 +26,32 @@
         "microbit"
     ],
     "preferredEditor": "tsprj",
+	
+	 "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "private_addressing": 0,
+                    "advertising_timeout": 0,
+                    "tx_power": 0,
+                    "dfu_service": 0,
+                    "event_service": 0,
+                    "device_info_service": 0,
+                    "eddystone_url": 0,
+                    "eddystone_uid": 0,
+                    "open": 0,
+                    "pairing_mode": 0,
+                    "whitelist": 1,
+                    "security_level": "SECURITY_MODE_ENCRYPTION_NO_MITM",
+                    "partial_flashing": 1,
+                    "enabled": 0
+                }
+            }
+        }
+    },
+	
+    "panic_on_heap_full": 0,
+	
     "authors": [
         "Luqmaan Baboo",
         "Bjarke Gotfredsen"

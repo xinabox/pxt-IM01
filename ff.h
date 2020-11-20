@@ -68,15 +68,18 @@ typedef struct
 
 typedef struct
 {
-	FFOBJID obj;
-	BYTE flag;
-	BYTE err;
-	FSIZE_t fptr;
-	DWORD clust;
-	LBA_t sect;
+	FFOBJID	obj;			/* Object identifier (must be the 1st member to detect invalid object pointer) */
+	BYTE	flag;			/* File status flags */
+	BYTE	err;			/* Abort flag (error code) */
+	FSIZE_t	fptr;			/* File read/write pointer (Zeroed on file open) */
+	DWORD	clust;			/* Current cluster of fpter (invalid when fptr is 0) */
+	LBA_t	sect;			/* Sector number appearing in buf[] (0:invalid) */
 #if !FF_FS_READONLY
-	LBA_t dir_sect;
-	BYTE *dir_ptr;
+	LBA_t	dir_sect;		/* Sector number containing the directory entry (not used at exFAT) */
+	BYTE*	dir_ptr;		/* Pointer to the directory entry in the win[] (not used at exFAT) */
+#endif
+#if !FF_FS_TINY
+	BYTE	buf[FF_MAX_SS];	/* File private data read/write window */
 #endif
 } FIL;
 

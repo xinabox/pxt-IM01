@@ -3,6 +3,13 @@
 
 #include "pxt.h"
 
+#if MICROBIT_CODAL
+#include "Pin.h"
+#define PinCompat codal::Pin
+#else
+#define PinCompat MicroBitPin
+#endif
+
 
 /*
 	MISO = P14
@@ -11,6 +18,14 @@
 	CS = P16
 */
 
+
+static SPI* allocSPI() {
+	SPI* spi = NULL;
+        spi = new SPI(MOSI, MISO, SCK);
+        return spi;
+}
+
+static SPI* p = NULL;
 
 void DO_INIT()
 {
@@ -54,7 +69,6 @@ void CK_H()
 }
 void CK_L()
 {
-  
   uBit.io.P13.setDigitalValue(0);
 }
 
@@ -72,6 +86,7 @@ void CS_L()
 {
   
   uBit.io.P16.setDigitalValue(0);
+  
 }
 
 void dly_us(UINT n)
@@ -107,54 +122,7 @@ static void xmit_mmc(
   do
   {
     d = *buff++;
-    if (d & 0x80)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x40)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x20)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x10)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x08)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x04)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x02)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
-    if (d & 0x01)
-      DI_H();
-    else
-      DI_L();
-    CK_H();
-    CK_L();
+	p->write((int)d);
   } while (--bc);
 }
 
@@ -164,51 +132,9 @@ static void rcvr_mmc(
 {
   BYTE r;
 
-  DI_H();
-
   do
   {
-    r = 0;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    r <<= 1;
-    if (DO())
-      r++;
-    CK_H();
-    CK_L();
-    *buff++ = r;
+    *buff++ = p->write(0xFF);
   } while (--bc);
 }
 
@@ -277,10 +203,8 @@ static int xmit_datablock(
     BYTE token)
 {
   BYTE d[2];
-
   if (!wait_ready())
     return 0;
-
   d[0] = token;
   xmit_mmc(d, 1);
   if (token != 0xFD)
@@ -288,10 +212,10 @@ static int xmit_datablock(
     xmit_mmc(buff, 512);
     rcvr_mmc(d, 2);
     rcvr_mmc(d, 1);
+    wait_ready();
     if ((d[0] & 0x1F) != 0x05)
       return 0;
   }
-
   return 1;
 }
 
@@ -299,7 +223,7 @@ static BYTE send_cmd(
     BYTE cmd,
     DWORD arg)
 {
-  BYTE n, d, buf[6];
+  BYTE n, d, buf[6], dummy[1];
 
   if (cmd & 0x80)
   {
@@ -309,12 +233,10 @@ static BYTE send_cmd(
       return n;
   }
 
-  if (cmd != CMD12)
-  {
-    deselect();
-    if (!select())
-      return 0xFF;
-  }
+  
+  	/* Select the card */
+	CS_H(); rcvr_mmc(dummy, 1);
+	CS_L(); rcvr_mmc(dummy, 1);
 
   buf[0] = 0x40 | cmd;
   buf[1] = (BYTE)(arg >> 24);
@@ -329,11 +251,10 @@ static BYTE send_cmd(
   buf[5] = n;
   xmit_mmc(buf, 6);
 
-  if (cmd == CMD12)
+  n = 0xFF;
+  do{
     rcvr_mmc(&d, 1);
-  n = 10;
-  do
-    rcvr_mmc(&d, 1);
+  }
   while ((d & 0x80) && --n);
 
   return d;
@@ -358,23 +279,30 @@ DSTATUS disk_initialize(
   if (drv)
     return RES_NOTRDY;
 
-  dly_us(10000);
   CS_INIT();
   CS_H();
-  CK_INIT();
-  CK_L();
-  DI_INIT();
-  DO_INIT();
+  p = allocSPI();
+  p->frequency(1000000);
+  p->format(8, 0);
 
   for (n = 10; n; n--)
+  {
     rcvr_mmc(buf, 1);
+  }
+  
+  CS_L();
 
   ty = 0;
-  if (send_cmd(CMD0, 0) == 1)
+  while(send_cmd(CMD0, 0) != 1)
   {
+	  uBit.serial.send("Failed! \n");
+  }
+  
+  
     if (send_cmd(CMD8, 0x1AA) == 1)
     {
       rcvr_mmc(buf, 4);
+	  
       if (buf[2] == 0x01 && buf[3] == 0xAA)
       {
         for (tmr = 1000; tmr; tmr--)
@@ -392,6 +320,7 @@ DSTATUS disk_initialize(
     }
     else
     {
+		
       if (send_cmd(ACMD41, 0) <= 1)
       {
         ty = CT_SD1;
@@ -411,10 +340,12 @@ DSTATUS disk_initialize(
       if (!tmr || send_cmd(CMD16, 512) != 0)
         ty = 0;
     }
-  }
+	
+
   CardType = ty;
   s = ty ? 0 : STA_NOINIT;
   Stat = s;
+  
 
   deselect();
 

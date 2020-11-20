@@ -1,7 +1,7 @@
 //%color=#444444 icon="\uf07b"
-namespace IM01 {
+namespace CS11 {
     let sdFlag = false
-    //%block="IM01 size of file %u"
+    //%block="CS11 size of file %u"
     //%u.defl="log.txt"
     function sizeOfFile(u: string): number {
         u = truncateStringLength(u)
@@ -12,7 +12,7 @@ namespace IM01 {
         return size(u)
     }
 
-    //%block="IM01 remove file"
+    //%block="CS11 remove file"
     //%u.defl="log.txt"
     export function removeFile(u: string): void {
         u = truncateStringLength(u)
@@ -24,7 +24,7 @@ namespace IM01 {
         return
     }
 
-    //%block="IM01 file %u exists"
+    //%block="CS11 file %u exists"
     //%u.defl="log.txt"
     export function fileExists(u: string): boolean {
         u = truncateStringLength(u)
@@ -35,7 +35,7 @@ namespace IM01 {
         return exists(u)
     }
 
-    //%block="IM01 overwrite file %u with %v"
+    //%block="CS11 overwrite file %u with %v"
     //%u.defl="log.txt"
     export function overwriteFile(u: string, v: string): void {
         u = truncateStringLength(u)
@@ -47,7 +47,7 @@ namespace IM01 {
         return
     }
 
-    //%block="IM01 append file %u with %v"
+    //%block="CS11 append file %u with %v"
     //%u.defl="log.txt"
     export function appendFile(u: string, v: string): void {
         u = truncateStringLength(u)
@@ -55,11 +55,14 @@ namespace IM01 {
             createFolder("CS11")
             sdFlag = true
         }
-        file(u, v, 0x02 | 0x30)
+        if(file(u, v, 0x02 | 0x30))
+		{
+			basic.showNumber(2)
+		}
         return
     }
 
-    //%block="IM01 append file %u with line %v"
+    //%block="CS11 append file %u with line %v"
     //%u.defl="log.txt"
     export function appendFileLine(u: string, v: string): void {
         u = truncateStringLength(u)
@@ -71,7 +74,7 @@ namespace IM01 {
         return
     }
 
-    //%block="IM01 read file %u"
+    //%block="CS11 read file %u"
     //%u.defl="log.txt"
     export function readFile(u: string): string {
         u = truncateStringLength(u)
@@ -82,38 +85,38 @@ namespace IM01 {
         return file_read(u)
     }
 
-    //%block="IM01 create folder %u"
+    //%block="CS11 create folder %u"
     function createFolder(u: string): void {
         mkdir(u)
         return;
     }
 
-    //%shim=im01::_mkdir
+    //%shim=cs11::_mkdir
     function mkdir(u: string): void {
         return
     }
 
-    //%shim=im01::_remove
+    //%shim=cs11::_remove
     function remove(u: string): void {
         return
     }
 
-    //%shim=im01::_file
+    //%shim=cs11::_file
     function file(u: string, v: string, x: number): boolean {
         return true
     }
 
-    //%shim=im01::_size
+    //%shim=cs11::_size
     function size(u: string): number {
         return 1
     }
 
-    //%shim=im01::_exists
+    //%shim=cs11::_exists
     function exists(u: string): boolean {
         return true
     }
 
-    //%shim=im01::_read
+    //%shim=cs11::_read
     function file_read(u: string): string {
         return ""
     }

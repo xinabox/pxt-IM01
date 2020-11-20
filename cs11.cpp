@@ -4,7 +4,7 @@
 #include "pxt.h"
 #include "pxtcore.h"
 
-namespace im01
+namespace cs11
 {
 
 //%
@@ -23,11 +23,11 @@ void _remove(String s)
 //%
 bool _file(String s, String v, uint8_t x)
 {
+	FRESULT fr;
     FATFS FatFs;
-    f_mount(&FatFs, "", 0);
+    fr = f_mount(&FatFs, "", 0);
     FIL Fil;
     UINT bw;
-    FRESULT fr;
     fr = f_open(&Fil, (const char *)s->getUTF8Data(), x);
     if (fr == FR_OK)
     {
