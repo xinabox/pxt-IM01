@@ -4,8 +4,7 @@
     "description": "XinaBox new IM01 extension",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "microphone": "*"
+        "core": "*"
     },
     "files": [
         "README.md",
@@ -15,8 +14,7 @@
         "diskio.h",
         "ff.cpp",
         "ff.h",
-        "ffconf.h",
-        "IM01.ts"
+        "ffconf.h"
     ],
     "testFiles": [
         "test.ts"
