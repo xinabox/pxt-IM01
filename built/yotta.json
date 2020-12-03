@@ -17,7 +17,8 @@
         "partial_flashing": 1,
         "enabled": 0
       },
-      "fiber_user_data": 1
+      "fiber_user_data": 1,
+      "pxt": 1
     }
   },
   "dependencies": {

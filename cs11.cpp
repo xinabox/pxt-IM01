@@ -6,9 +6,8 @@
 
 namespace cs11
 {
-
 //%
-void _mkdir(String s)
+void _mkdir()
 {
 }
 
@@ -24,8 +23,9 @@ void _remove(String s)
 bool _file(String s, String v, uint8_t x)
 {
 	FRESULT fr;
-    FATFS FatFs;
-    fr = f_mount(&FatFs, "", 0);
+	FATFS FatFs;
+	fr = f_mount(&FatFs, "", 0);
+
     FIL Fil;
     UINT bw;
     fr = f_open(&Fil, (const char *)s->getUTF8Data(), x);
@@ -33,6 +33,7 @@ bool _file(String s, String v, uint8_t x)
     {
         f_write(&Fil, (const char *)v->getUTF8Data(), v->getUTF8Size(), &bw);
         fr = f_close(&Fil);
+		
         if (fr == FR_OK && bw == v->getUTF8Size())
         {
             return true;

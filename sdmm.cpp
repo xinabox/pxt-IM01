@@ -148,7 +148,7 @@ static int wait_ready(void)
     rcvr_mmc(&d, 1);
     if (d == 0xFF)
       break;
-    dly_us(100);
+    dly_us(500);
   }
 
   return tmr ? 1 : 0;

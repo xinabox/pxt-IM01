@@ -39,10 +39,6 @@ namespace CS11 {
     //%u.defl="log.txt"
     export function overwriteFile(u: string, v: string): void {
         u = truncateStringLength(u)
-        if (sdFlag == false) {
-            createFolder("CS11")
-            sdFlag = true
-        }
         file(u, v, 0x02 | 0x08)
         return
     }
@@ -51,14 +47,7 @@ namespace CS11 {
     //%u.defl="log.txt"
     export function appendFile(u: string, v: string): void {
         u = truncateStringLength(u)
-        if (sdFlag == false) {
-            createFolder("CS11")
-            sdFlag = true
-        }
-        if(file(u, v, 0x02 | 0x30))
-		{
-			basic.showNumber(2)
-		}
+        file(u, v, 0x02 | 0x30)
         return
     }
 
@@ -66,10 +55,6 @@ namespace CS11 {
     //%u.defl="log.txt"
     export function appendFileLine(u: string, v: string): void {
         u = truncateStringLength(u)
-        if (sdFlag == false) {
-            createFolder("CS11")
-            sdFlag = true
-        }
         file(u, v + "\n", 0x02 | 0x30)
         return
     }
@@ -87,12 +72,12 @@ namespace CS11 {
 
     //%block="CS11 create folder %u"
     function createFolder(u: string): void {
-        mkdir(u)
+        mkdir()
         return;
     }
 
     //%shim=cs11::_mkdir
-    function mkdir(u: string): void {
+    function mkdir(): void {
         return
     }
 
@@ -129,6 +114,8 @@ namespace CS11 {
         }
         return u
     }
+	
+	mkdir()
 	
 	
 }

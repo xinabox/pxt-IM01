@@ -1642,6 +1642,7 @@ FRESULT f_sync(
 			tm = GET_FATTIME();
 			{
 				res = move_window(fs, fp->dir_sect);
+				
 			
 				
 				if (res == FR_OK)
