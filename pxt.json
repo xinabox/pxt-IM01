@@ -32,8 +32,7 @@
         "Luqmaan Baboo",
         "Bjarke Gotfredsen"
     ],
-	
-	"yotta": {
+    "yotta": {
         "config": {
             "microbit-dal": {
                 "bluetooth": {
