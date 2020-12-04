@@ -4,7 +4,7 @@
 #include "pxt.h"
 #include "pxtcore.h"
 
-namespace cs11
+namespace im01
 {
 //%
 void _mkdir()
