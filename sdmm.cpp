@@ -113,6 +113,8 @@ static DSTATUS Stat = STA_NOINIT;
 
 static BYTE CardType;
 
+bool enabled = false;
+
 static void xmit_mmc(
     const BYTE *buff,
     UINT bc)
@@ -281,9 +283,15 @@ DSTATUS disk_initialize(
 
   CS_INIT();
   CS_H();
-  p = allocSPI();
-  p->frequency(1000000);
-  p->format(8, 0);
+
+  if(!enabled)
+  {
+	  p = allocSPI();
+	  p->frequency(10000);
+	  p->format(8, 0);
+	  enabled = true;
+	  uBit.serial.send("Called!\n");
+  }
 
   for (n = 10; n; n--)
   {
