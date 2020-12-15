@@ -63,10 +63,6 @@ namespace IM01 {
     //%u.defl="log.txt"
     export function readFile(u: string): string {
         u = truncateStringLength(u)
-        if (sdFlag == false) {
-            createFolder("CS11")
-            sdFlag = true
-        }
         return file_read(u)
     }
 

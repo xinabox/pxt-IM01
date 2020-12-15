@@ -1,17 +1,17 @@
 ; Interface tables: 0/0 (NaN%)
 ; Virtual methods: 0 / 0
-; generated code sizes (bytes): 2920 (incl. 2060 user, 778 helpers, 14 vtables, 68 lits); src size 0
-; assembly: 2091 lines; density: 68.67 bytes/stmt; (30 stmts)
-; total bytes: 197480 (81.4% of 237.0k flash with 45208 free)
-; peep hole pass: 52 instructions removed and 60 updated
-; peep hole pass: 17 instructions removed and 0 updated
+; generated code sizes (bytes): 2556 (incl. 1738 user, 752 helpers, 14 vtables, 52 lits); src size 0
+; assembly: 1781 lines; density: 124.14 bytes/stmt; (14 stmts)
+; total bytes: 198140 (81.6% of 237.0k flash with 44548 free)
+; peep hole pass: 38 instructions removed and 43 updated
+; peep hole pass: 11 instructions removed and 0 updated
 ; peep hole pass: 0 instructions removed and 0 updated
 
 
 ; start
-    .startaddr 0x2f800
+    .startaddr 0x2fc00
     .hex 708E3B92C615A841C49866C975EE5197 ; magic number
-    .hex 0FE856BC3297098B ; hex template hash
+    .hex BD11ACD262134A75 ; hex template hash
     .hex 873266330af9dbdb ; replaced in binary by program hash
     .short 3   ; num. globals
     .short 0 ; patched with number of 64 bit words resulting from assembly
@@ -22,7 +22,7 @@
     .word _pxt_lambda_trampoline@fn
     .word _pxt_perf_counters
     .word _pxt_restore_exception_state@fn
-    .word _str3 ; name
+    .word _str2 ; name
     ;
 ; Function <main> main.ts:1
     ;
@@ -52,17 +52,7 @@ _main___P1_locals:
     @stackempty locals
     mov r7, sp
     str r7, [r6, #4]
-    bl cs11::_mkdir
-    @stackempty locals
-    movs r0, #1
-    lsls r0, r0, #8
-    adds r0, #45
-    push {r0} ; proc-arg
-    movs r0, #1
-    push {r0} ; proc-arg
-    bl basic_showNumber__P354
-_proccall4:
-    add sp, #4*2 ; pop locals 2
+    bl im01::_mkdir
     @stackempty locals
     ldr r0, _ldlit_2      
     push {r0} ; proc-arg
@@ -82,103 +72,90 @@ _main___P1_end:
     @stackempty args
 ; endfun
     ;
-; Function inline main.ts:3
+; Function inline main.ts:1
     ;
     .section code
     .balign 4
-inline__P690_Lit:
+inline__P688_Lit:
     .word pxt::RefAction_vtable
     .short 0, 0 ; no captured vars
-    .word inline__P690_args@fn
-inline__P690_args:
+    .word inline__P688_args@fn
+inline__P688_args:
     .section code
-inline__P690:
-inline__P690_nochk:
+inline__P688:
+inline__P688_nochk:
     @stackmark func
     @stackmark args
     push {lr}
 .locals:
     @stackmark locals
-inline__P690_locals:
+inline__P688_locals:
     ldr r0, _ldlit_3      
     push {r0} ; proc-arg
-    ldr r0, _ldlit_4      
+    bl IM01_readFile__P675
+_proccall3:
+    add sp, #4*1 ; pop locals 1
     push {r0} ; proc-arg
-    bl CS11_appendFile__P673
-_proccall5:
-    add sp, #4*2 ; pop locals 2
+    bl _conv_2
+    movs r1, #150
+    mov r7, sp
+    str r7, [r6, #4]
+    bl basic::showString
+    add sp, #4*1 ; pop locals 1
     @stackempty locals
-    movs r0, #1
-    lsls r0, r0, #8
-    adds r0, #45
-    push {r0} ; proc-arg
-    movs r0, #3
-    push {r0} ; proc-arg
-    bl basic_showNumber__P354
-_proccall6:
-    add sp, #4*2 ; pop locals 2
-    @stackempty locals
-.ret.690:
+.ret.688:
     @stackempty locals
     movs r0, #0
 .final_0_2:
-inline__P690_end:
+inline__P688_end:
     pop {pc}
     @stackempty func
     @stackempty args
 ; endfun
     ;
-; Function appendFile cs11.ts:48
+; Function readFile cs11.ts:64
     ;
     .section code
     .balign 4
     .section code
-CS11_appendFile__P673:
-CS11_appendFile__P673_nochk:
+IM01_readFile__P675:
+IM01_readFile__P675_nochk:
     @stackmark func
     @stackmark args
     push {lr}
 .locals:
     @stackmark locals
-CS11_appendFile__P673_locals:
+IM01_readFile__P675_locals:
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
-    bl CS11_truncateStringLength__P683
-_proccall7:
+    bl IM01_truncateStringLength__P683
+_proccall4:
     add sp, #4*1 ; pop locals 1
     str r0, [sp, args@0]
     @stackempty locals
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
-    ldr r0, [sp, args@1]
-    push {r0} ; proc-arg
     bl _conv_2
-    movs r2, #50
     mov r7, sp
     str r7, [r6, #4]
-    bl cs11::_file
-    add sp, #4*2 ; pop locals 2
-    mov r7, sp
-    str r7, [r6, #4]
-    bl pxt::fromBool
+    bl im01::_read
+    add sp, #4*1 ; pop locals 1
+.ret.675:
     @stackempty locals
-.ret.673:
-    @stackempty locals
-    movs r0, #0
 .final_0_3:
-CS11_appendFile__P673_end:
+IM01_readFile__P675_end:
     pop {pc}
     @stackempty func
     @stackempty args
 ; endfun
     ;
-; Function truncateStringLength cs11.ts:109
+; Function truncateStringLength cs11.ts:105
     ;
     .section code
     .balign 4
     .section code
-CS11_truncateStringLength__P683:
-CS11_truncateStringLength__P683_nochk:
+IM01_truncateStringLength__P683:
+IM01_truncateStringLength__P683_nochk:
     @stackmark func
     @stackmark args
     push {lr}
@@ -187,11 +164,11 @@ CS11_truncateStringLength__P683_nochk:
     push {r0} ;loc
     push {r0} ;loc
     @stackmark locals
-CS11_truncateStringLength__P683_locals:
+IM01_truncateStringLength__P683_locals:
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
-    bl _conv_3
-    ldr r1, _ldlit_5      
+    bl _conv_2
+    ldr r1, _ldlit_4      
     movs r2, #0
     mov r7, sp
     str r7, [r6, #4]
@@ -206,7 +183,7 @@ CS11_truncateStringLength__P683_locals:
     push {r0} ; proc-arg
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
-    bl _conv_3
+    bl _conv_2
     mov r7, sp
     str r7, [r6, #4]
     bl String_::length
@@ -218,7 +195,7 @@ CS11_truncateStringLength__P683_locals:
     push {r2}
     push {r3}
     bl helpers_stringSubstr__P206
-_proccall8:
+_proccall5:
     add sp, #4*3 ; pop locals 3
     str r0, [sp, locals@1]
     @stackempty locals
@@ -226,7 +203,7 @@ _proccall8:
     movs r1, #17
     bl _cmp_gt
     beq .else_0_4      
-.jmpz9:
+.jmpz6:
     movs r0, #17
     push {r0} ; proc-arg
     movs r0, #1
@@ -234,12 +211,12 @@ _proccall8:
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
     bl helpers_stringSubstr__P206
-_proccall10:
+_proccall7:
     add sp, #4*3 ; pop locals 3
     push {r0} ; proc-arg
     ldr r0, [sp, locals@1]
     push {r0} ; proc-arg
-    bl _conv_2
+    bl _conv_3
     mov r7, sp
     str r7, [r6, #4]
     bl String_::concat
@@ -253,7 +230,7 @@ _proccall10:
     @stackempty locals
 .final_2_4:
     add sp, #4*2 ; pop locals 2
-CS11_truncateStringLength__P683_end:
+IM01_truncateStringLength__P683_end:
     pop {pc}
     @stackempty func
     @stackempty args
@@ -276,10 +253,10 @@ helpers_stringSubstr__P206_locals:
     movs r1, #0
     bl _cmp_eqq
     beq .condexprz_0_5      
-.jmpz11:
+.jmpz8:
     ldr r0, [sp, args@0]
     push {r0} ; proc-arg
-    bl _conv_3
+    bl _conv_2
     mov r7, sp
     str r7, [r6, #4]
     bl String_::length
@@ -294,7 +271,7 @@ helpers_stringSubstr__P206_locals:
     bl numops::toBool
     cmp r0, #0
     beq .lazySkip_3_5      
-.jmpz12:
+.jmpz9:
     ldr r0, [sp, #4*0] ; tmpref @1
     @dummystack 1
     add sp, #4*1 ; pop locals 1
@@ -326,198 +303,6 @@ helpers_stringSubstr__P206_locals:
 .final_4_5:
 helpers_stringSubstr__P206_end:
     pop {pc}
-    @stackempty func
-    @stackempty args
-; endfun
-    ;
-; Function showNumber core/basic.ts:12
-    ;
-    .section code
-    .balign 4
-    .section code
-basic_showNumber__P354:
-basic_showNumber__P354_nochk:
-    @stackmark func
-    @stackmark args
-    push {lr}
-.locals:
-    @stackmark locals
-basic_showNumber__P354_locals:
-    movs r0, #5
-    push {r0} ; proc-arg
-    ldr r0, [sp, args@0]
-    push {r0} ; proc-arg
-    bl Math_roundWithPrecision__P219
-_proccall13:
-    add sp, #4*2 ; pop locals 2
-    push {r0} ; proc-arg
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::toString
-    add sp, #4*1 ; pop locals 1
-    push {r0} ; proc-arg
-    ldr r0, [sp, args@1]
-    push {r0} ; proc-arg
-    bl _conv_5
-    mov r7, sp
-    str r7, [r6, #4]
-    bl basic::showString
-    add sp, #4*2 ; pop locals 2
-    @stackempty locals
-.ret.354:
-    @stackempty locals
-    movs r0, #0
-.final_0_6:
-basic_showNumber__P354_end:
-    pop {pc}
-    @stackempty func
-    @stackempty args
-; endfun
-    ;
-; Function roundWithPrecision core/pxt-helpers.ts:559
-    ;
-    .section code
-    .balign 4
-    .section code
-Math_roundWithPrecision__P219:
-Math_roundWithPrecision__P219_nochk:
-    @stackmark func
-    @stackmark args
-    push {lr}
-.locals:
-    movs r0, #0
-    push {r0} ;loc
-    push {r0} ;loc
-    @stackmark locals
-Math_roundWithPrecision__P219_locals:
-    ldr r0, [sp, args@1]
-    movs r1, #1
-    bl _numops_orrs
-    str r0, [sp, args@1]
-    @stackempty locals
-    ldr r0, [sp, args@1]
-    movs r1, #1
-    bl _cmp_le
-    beq .else_0_7      
-.jmpz14:
-    ldr r0, [sp, args@0]
-    push {r0} ; proc-arg
-    mov r7, sp
-    str r7, [r6, #4]
-    bl Math_::round
-    add sp, #4*1 ; pop locals 1
-    b .ret.219      
-.else_0_7:
-.afterif_1_7:
-    ldr r0, [sp, args@0]
-    movs r1, #1
-    bl _cmp_eq
-    beq .else_2_7      
-.jmpz15:
-    movs r0, #1
-    b .ret.219      
-.else_2_7:
-.afterif_3_7:
-    movs r0, #1
-    str r0, [sp, locals@0]
-    @stackempty locals
-.cont.776:
-    ldr r0, [sp, args@1]
-    push {r0} ; proc-arg
-    ldr r1, [sp, #4*0] ; estack
-    movs r0, #21
-    mov r7, sp
-    str r7, [r6, #4]
-    bl Math_::pow
-    add sp, #4*1 ; pop locals 1
-    str r0, [sp, locals@1]
-    @stackempty locals
-    ldr r0, [sp, args@0]
-    push {r0} ; proc-arg
-    ldr r0, [sp, locals@1]
-    push {r0} ; proc-arg
-    ldr r0, [sp, #4*1] ; estack
-    ldr r1, [sp, #4*0] ; estack
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::muls
-    add sp, #4*2 ; pop locals 2
-    push {r0} ; proc-arg
-    mov r7, sp
-    str r7, [r6, #4]
-    bl Math_::round
-    add sp, #4*1 ; pop locals 1
-    push {r0} ; proc-arg
-    ldr r0, [sp, locals@1]
-    push {r0} ; proc-arg
-    ldr r0, [sp, #4*1] ; estack
-    ldr r1, [sp, #4*0] ; estack
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::div
-    add sp, #4*2 ; pop locals 2
-    str r0, [sp, locals@0]
-    @stackempty locals
-    ldr r0, [sp, args@1]
-    movs r1, #3
-    bl _numops_adds
-    str r0, [sp, args@1]
-    @stackempty locals
-    ldr r0, [sp, locals@0]
-    push {r0} ; proc-arg
-    movs r1, #1
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::eq
-    add sp, #4*1 ; pop locals 1
-    push {r0}; tmpstore @1
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::toBool
-    cmp r0, #0
-    bne .lazySkip_5_7      
-.jmpz16:
-    ldr r0, [sp, #4*0] ; tmpref @1
-    @dummystack 1
-    add sp, #4*1 ; pop locals 1
-    b .lazy_4_7      
-.lazySkip_5_7:
-    ldr r0, [sp, #0]      
-    ldr r0, [sp, #4*0] ; estack
-    add sp, #4*1 ; pop locals 1
-    ldr r0, [sp, args@1]
-    push {r0} ; proc-arg
-    movs r1, #43
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::lt
-    add sp, #4*1 ; pop locals 1
-.lazy_4_7:
-; jmp value (already in r0)
-    mov r7, sp
-    str r7, [r6, #4]
-    bl numops::toBoolDecr
-    cmp r0, #0
-    beq .brk.776      
-.jmpz17:
-    b .cont.776      
-.brk.776:
-    ldr r0, [sp, locals@0]
-.ret.219:
-    @stackempty locals
-.final_6_7:
-    add sp, #4*2 ; pop locals 2
-Math_roundWithPrecision__P219_end:
-    pop {pc}
-.balign 4
-_ldlit_2:
- .word inline__P690_Lit
-_ldlit_3:
- .word _str2
-_ldlit_4:
- .word _str1
-_ldlit_5:
- .word _str0
     @stackempty func
     @stackempty args
 ; endfun
@@ -784,6 +569,13 @@ _pxt_map_get:
     str r7, [r6, #4]
     bl pxtrt::mapGetByString
     pop {pc}
+.balign 4
+_ldlit_2:
+ .word inline__P688_Lit
+_ldlit_3:
+ .word _str1
+_ldlit_4:
+ .word _str0
 .notmap:
     mov r4, r3 ; save VT
     push {r0, lr}
@@ -927,7 +719,7 @@ _pxt_map_set:
 _pxt_bind_helper:
     push {r0, r2}
     movs r0, #2
-    ldr r1, _ldlit_7      
+    ldr r1, _ldlit_6      
     mov r7, sp
     str r7, [r6, #4]
     bl pxt::mkAction
@@ -944,7 +736,7 @@ _pxt_bind_lit:
     cmp r4, #12
     bge .fail
     lsls r3, r4, #2
-    ldr r2, _ldlit_8      
+    ldr r2, _ldlit_7      
     ldr r1, [r2, r3]
     ldr r3, [r0, #12]
     ldr r2, [r0, #16]
@@ -1236,6 +1028,15 @@ _conv_1:
 _conv_2:
     @stackmark args
     push {lr}
+    ldr r0, [sp, #4*1] ; estack
+    bl _pxt_stringConv
+    str r0, [sp, #4*1] ; estack
+    pop {pc}
+    @stackempty args
+    .section code
+_conv_3:
+    @stackmark args
+    push {lr}
     ldr r0, [sp, #4*2] ; estack
     bl _pxt_stringConv
     str r0, [sp, #4*2] ; estack
@@ -1245,15 +1046,6 @@ _conv_2:
     str r0, [sp, #4*2] ; estack
     mov r1, r0      
     pop {r0, pc}      
-    @stackempty args
-    .section code
-_conv_3:
-    @stackmark args
-    push {lr}
-    ldr r0, [sp, #4*1] ; estack
-    bl _pxt_stringConv
-    str r0, [sp, #4*1] ; estack
-    pop {pc}
     @stackempty args
     .section code
 _conv_4:
@@ -1278,23 +1070,6 @@ _conv_4:
 .isint3:
     mov r2, r0      
     pop {r1}
-    pop {r0, pc}      
-    @stackempty args
-    .section code
-_conv_5:
-    @stackmark args
-    push {lr}
-    ldr r0, [sp, #4*2] ; estack
-    bl _pxt_stringConv
-    str r0, [sp, #4*2] ; estack
-    push {r0}
-    ldr r0, [sp, #4*2] ; estack
-    asrs r0, r0, #1
-    bcs .isint2
-    lsls r0, r0, #1
-    bl _numops_toInt
-.isint2:
-    mov r1, r0      
     pop {r0, pc}      
     @stackempty args
 _numops_adds:
@@ -1379,11 +1154,6 @@ _numops_eors:
                     bl numops::eors
                     add sp, #8
                     pop {pc}
-.balign 4
-_ldlit_7:
- .word _pxt_bind_lit
-_ldlit_8:
- .word _pxt_copy_list
 _numops_lsls:
     @scope _numops_lsls
     lsls r2, r0, #31
@@ -1410,6 +1180,11 @@ _numops_lsls:
                     bl numops::lsls
                     add sp, #8
                     pop {pc}
+.balign 4
+_ldlit_6:
+ .word _pxt_bind_lit
+_ldlit_7:
+ .word _pxt_copy_list
 _numops_lsrs:
     @scope _numops_lsrs
     lsls r2, r0, #31
@@ -1666,14 +1441,14 @@ _helpers_end:
 .balign 4
 _pxt_iface_member_names:
     .word 1
-    .word _str18  ; 0 .
+    .word _str10  ; 0 .
     .word 0
 _vtables_end:
 .balign 4
 _pxt_config_data:
     .word 0
 .balign 4
-_str18:
+_str10:
  .word pxt::string_inline_ascii_vt
         .short 0
         .string ""
@@ -1685,15 +1460,10 @@ _str0:
 .balign 4
 _str1:
  .word pxt::string_inline_ascii_vt
-        .short 7
-        .string "bye.txt"
+        .short 9
+        .string "hello.txt"
 .balign 4
 _str2:
- .word pxt::string_inline_ascii_vt
-        .short 6
-        .string "Hello\n"
-.balign 4
-_str3:
  .word pxt::string_inline_ascii_vt
         .short 4
         .string "IM01"

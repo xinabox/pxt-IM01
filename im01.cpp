@@ -73,5 +73,32 @@ bool _exists(String s)
 //%
 String _read(String s)
 {
+	FATFS FatFs;
+	String cpy_string;
+	char* error_no_file = "ERROR! NO FILE";
+	UINT* br;
+	char* buff;
+	uint32_t lSize = 0;
+	FIL Fil;
+    FRESULT fr;
+	
+	
+    f_mount(&FatFs, "", 0);
+	
+    fr = f_open(&Fil, (const char *)s->getUTF8Data(), FA_READ);
+	if(fr == FR_OK)
+	{
+		lSize = f_size(&Fil);
+		buff = (char*) malloc (sizeof(char)*lSize);
+		
+		f_read(&Fil, buff, lSize, br);
+	}else{
+		cpy_string = mkString(error_no_file, strlen(error_no_file));
+	}
+	
+	cpy_string = mkString(buff, lSize);
+	free(buff);
+    f_close(&Fil);
+    return cpy_string;
 }
 } // namespace cs11
