@@ -30,6 +30,7 @@
     "panic_on_heap_full": 0,
     "authors": [
         "Luqmaan Baboo",
+        "KalbeAbbas",
         "Bjarke Gotfredsen"
     ],
     "yotta": {
